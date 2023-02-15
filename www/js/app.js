@@ -5,7 +5,7 @@ var app = new Framework7({
     name: 'Auto Update App', // App name
     theme: 'auto', // Automatic theme detection
     el: '#app', // App root element
-    version: '1.0.1',
+    version: '1.0.2',
     id: 'io.framework7.myapp', // App bundle ID
     // App store
     store: store,
