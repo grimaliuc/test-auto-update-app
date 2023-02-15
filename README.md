@@ -88,3 +88,8 @@ framework7 assets --ui
 Love Framework7? Support project by donating or pledging on:
 - Patreon: https://patreon.com/framework7
 - OpenCollective: https://opencollective.com/framework7
+
+## Sign App
+
+- `jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore prodapp.keystore app-debug.apk prodapp`
+- `zipalign -v 9 app-debug.apk version-io.framework7.myapp.10004.apk`
