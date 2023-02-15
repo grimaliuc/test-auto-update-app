@@ -1,0 +1,14 @@
+{
+  "android": {
+    "debug": {
+      "keystore": "../build/keystore/prodapp.keystore",
+      "alias": "prodapp",
+      "packageType": "apk"
+    },
+    "release": {
+      "keystore": "../build/keystore/prodapp.keystore",
+      "alias": "prodapp",
+      "packageType": "apk"
+    }
+  }
+}
