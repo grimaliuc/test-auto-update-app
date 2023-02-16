@@ -199,6 +199,7 @@ var cordovaApp = {
             cordovaApp.handleKeyboard();
             // Handle Android back button
             cordovaApp.handleAndroidBackButton();
+            cordovaApp.handleSplashscreen();
             // }//just for browser testing
         });
     },
