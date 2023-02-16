@@ -1,13 +1,14 @@
 {
   "name": "auto-update-app",
   "private": true,
-  "version": "1.0.4",
+  "version": "1.0.2",
   "description": "Auto Update App",
   "repository": "",
   "license": "UNLICENSED",
   "scripts": {
     "start": "npm run serve",
     "serve": "http-server ./www/ -o -c 1 -a localhost -p 8181",
+    "build-cordova-signed-app": "node ./build/build.js && cd cordova && cordova build --release -- --storePassword=q1w2e3r4 --password=q1w2e3r4",
     "build-cordova": "node ./build/build.js && cd cordova && cordova build",
     "run-on-android": "node ./build/build.js && cd cordova && cordova build && cordova run android --device",
     "postinstall": "cpy --flat ./node_modules/framework7-icons/fonts/*.* ./www/fonts/ && cpy --flat ./node_modules/material-icons/iconfont/*.* ./www/fonts/ && cpy --flat ./node_modules/framework7/*.js ./www/framework7 && cpy --flat ./node_modules/framework7/*.js.map ./www/framework7 && cpy --flat ./node_modules/framework7/*.css ./www/framework7 && cpy --flat ./node_modules/framework7/*.map ./www/framework7"

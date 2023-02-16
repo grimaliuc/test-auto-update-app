@@ -92,5 +92,5 @@ Love Framework7? Support project by donating or pledging on:
 ## Sign App
 
 - `jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore prodapp.keystore app-debug.apk prodapp`
-- `cordova run android --release -- --storePassword=q1w2e3r4 --password=q1w2e3r4`
+- `cordova build android --release -- --storePassword=q1w2e3r4 --password=q1w2e3r4`
 - `zipalign -v 9 app-debug.apk version-io.framework7.myapp.10004.apk`
