@@ -32,6 +32,16 @@ var app = new Framework7({
                 cordovaApp.init(f7);
             }
         },
+        pageInit: function ($page) {
+
+            if ($page.name === 'map') {
+                console.log($page)
+                // do something when page initialized
+                $('#test').on('click', function () {
+                    app.dialog.alert('Failed because');
+                });
+            }
+        },
     },
 });
 // Login Screen Demo
@@ -45,3 +55,25 @@ $('#my-login-screen .login-button').on('click', function () {
     // Alert username and password
     app.dialog.alert('Username: ' + username + '<br/>Password: ' + password);
 });
+
+
+$('#camera').on('click', function () {
+    navigator.camera.getPicture(onSuccess, onFail, {
+        quality: 50,
+        destinationType: Camera.DestinationType.DATA_URL,
+        correctOrientation: true
+    });
+});
+
+function onSuccess(imageData) {
+    var image = document.getElementById('img');
+    image.style.display = 'block';
+    image.src = "data:image/jpeg;base64," + imageData;
+}
+
+function onFail(message) {
+    alert('Failed because: ' + message);
+}
+
+
+// Get geo coordinates
