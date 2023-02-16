@@ -5,5 +5,9 @@
       "alias": "prodapp",
       "packageType": "apk"
     }
+  },
+  "appBuildDetails": {
+    "id": "io.framework7.myapp",
+    "version": 10004
   }
 }
