@@ -19,6 +19,7 @@
     "cordova-plugin-camera": "^6.0.0",
     "cordova-plugin-device": "^2.1.0",
     "cordova-plugin-file": "^7.0.0",
+    "cordova-plugin-geolocation": "^4.1.0",
     "cordova-plugin-keyboard": "^1.2.0",
     "cordova-plugin-network-information": "^3.0.0",
     "cordova-plugin-splashscreen": "^6.0.2",
@@ -37,7 +38,10 @@
         "ANDROIDX_WEBKIT_VERSION": "1.4.0"
       },
       "cordova-plugin-network-information": {},
-      "cordova-plugin-app-update": {}
+      "cordova-plugin-app-update": {},
+      "cordova-plugin-geolocation": {
+        "GPS_REQUIRED": "true"
+      }
     },
     "platforms": [
       "android"
