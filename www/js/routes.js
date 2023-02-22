@@ -19,8 +19,7 @@ async function checkAuth(context) {
 var routes = [
     {
         path: '/',
-        name: 'home',
-        componentUrl: './pages/home.html',
+        url: './index.html',
         // url: './pages/home.html',
         beforeEnter: checkAuth,
     },
@@ -39,6 +38,10 @@ var routes = [
     {
         path: '/catalog/',
         componentUrl: './pages/catalog.html',
+    },
+    {
+        path: '/home/',
+        componentUrl: './pages/home.html',
     },
     {
         path: '/login-screen/',

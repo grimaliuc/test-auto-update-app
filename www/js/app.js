@@ -16,7 +16,6 @@ var options = {
     brokerRedirectUri: false,
     accountMode: 'SINGLE',
     scopes: ['User.Read']
-
 }
 var app = new Framework7({
     name: 'Auto Update App', // App name
@@ -42,8 +41,8 @@ var app = new Framework7({
     on: {
         init: function () {
             var f7 = this;
-            if (f7.device.cordova) {
-                // if (f7.device.android) {
+            // if (f7.device.cordova) {
+                if (f7.device.android) {
                 // Init cordova APIs (see cordova-app.js)
                 cordovaApp.init(f7);
             }
@@ -62,12 +61,11 @@ var app = new Framework7({
                             console.log('msalInit');
                             console.log(resp);
                             window.cordova.plugins.msalPlugin.signInSilent(
-                                function (msg) {
-                                    console.log(msg);
-                                    isDeviceAuthenticated = true;
-                                    isUserAuthenticated = true;
+                                function (respAuth) {
+                                    console.log(respAuth['account']['username']);
+                                    // localStorage.setItem('client', resp['account']['username']);
+                                    // console.log(respAuth);
                                     console.log('signed in');
-
                                 },
                                 function (err) {
                                     window.cordova.plugins.msalPlugin.signInInteractive(
