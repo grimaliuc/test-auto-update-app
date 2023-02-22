@@ -187,20 +187,22 @@ var cordovaApp = {
     init: function (f7) {
         // Save f7 instance
         cordovaApp.f7 = f7;
-        // document.addEventListener('readystatechange', (event) => {//just for browser testing
-        document.addEventListener('deviceready', () => {
-            //     if (event.target.readyState === 'complete') {//just for browser testing
-            console.log('Device is ready');
-            // check if we have a newer version first thing on device ready
-            // will also check on every page init
-            cordovaApp.checkForApplicationUpdate();
-            console.log('After check for updates');
-            // Handle Keyboard
-            cordovaApp.handleKeyboard();
-            // Handle Android back button
-            cordovaApp.handleAndroidBackButton();
-            cordovaApp.handleSplashscreen();
-            // }//just for browser testing
+        document.addEventListener('readystatechange', (event) => {//just for browser testing
+            // document.addEventListener('deviceready', () => {
+            if (event.target.readyState === 'complete') {//just for browser testing
+                console.log('Device is ready');
+                // check if we have a newer version first thing on device ready
+                // will also check on every page init
+                cordovaApp.checkForApplicationUpdate();
+                console.log('After check for updates');
+                // Handle Keyboard
+                cordovaApp.handleKeyboard();
+                // Handle Android back button
+                cordovaApp.handleAndroidBackButton();
+                cordovaApp.handleSplashscreen();
+
+                app.views.create('.view-main', {url: '/'});
+            }//just for browser testing
         });
     },
 };

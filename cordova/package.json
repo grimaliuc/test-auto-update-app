@@ -21,6 +21,7 @@
     "cordova-plugin-file": "^7.0.0",
     "cordova-plugin-geolocation": "^4.1.0",
     "cordova-plugin-keyboard": "^1.2.0",
+    "cordova-plugin-msal": "^4.0.0",
     "cordova-plugin-network-information": "^3.0.0",
     "cordova-plugin-splashscreen": "^6.0.2",
     "cordova-plugin-statusbar": "^3.0.0"
@@ -41,6 +42,11 @@
       "cordova-plugin-app-update": {},
       "cordova-plugin-geolocation": {
         "GPS_REQUIRED": "true"
+      },
+      "cordova-plugin-msal": {
+        "TENANT_ID": "5669e44c-6a4d-415f-bad4-de9d7605e699",
+        "CLIENT_ID": "51c1dcee-9472-45f1-be29-ef05ebf8d11e",
+        "KEY_HASH": "xTzStewcqrVuEKKxT5t8WSy6keY="
       }
     },
     "platforms": [

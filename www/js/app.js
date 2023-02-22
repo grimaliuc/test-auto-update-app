@@ -1,6 +1,23 @@
 var $ = Dom7;
+var f7Device = Framework7.getDevice();
+var options = {
+    clientId: '51c1dcee-9472-45f1-be29-ef05ebf8d11e',
+    tenantId: "5669e44c-6a4d-415f-bad4-de9d7605e699",
+    authorities: [
+        {
+            type: 'AAD',
+            audience: 'AzureADMyOrg',
+            cloudInstance: 'MSALAzurePublicCloudInstance',
+            default: true
+        }
+    ],
+    authorizationUserAgent: 'WEBVIEW',
+    multipleCloudsSupported: false,
+    brokerRedirectUri: false,
+    accountMode: 'SINGLE',
+    scopes: ['User.Read']
 
-var device = Framework7.getDevice();
+}
 var app = new Framework7({
     name: 'Auto Update App', // App name
     theme: 'auto', // Automatic theme detection
@@ -12,11 +29,10 @@ var app = new Framework7({
     // App routes
     routes: routes,
 
-
     // Input settings
     input: {
-        scrollIntoViewOnFocus: device.cordova && !device.electron,
-        scrollIntoViewCentered: device.cordova && !device.electron,
+        scrollIntoViewOnFocus: f7Device.cordova && !f7Device.electron,
+        scrollIntoViewCentered: f7Device.cordova && !f7Device.electron,
     },
     // Cordova Statusbar settings
     statusbar: {
@@ -33,12 +49,55 @@ var app = new Framework7({
             }
         },
         pageInit: function ($page) {
-
             if ($page.name === 'map') {
                 console.log($page)
                 // do something when page initialized
                 $('#test').on('click', function () {
                     app.dialog.alert('Failed because');
+                });
+            }
+            if ($page.name === 'login-screen') {
+                $('#signInApp').on('click', function () {
+                    window.cordova.plugins.msalPlugin.msalInit(function (resp) {
+                            console.log('msalInit');
+                            console.log(resp);
+                            window.cordova.plugins.msalPlugin.signInSilent(
+                                function (msg) {
+                                    console.log(msg);
+                                    isDeviceAuthenticated = true;
+                                    isUserAuthenticated = true;
+                                    console.log('signed in');
+
+                                },
+                                function (err) {
+                                    window.cordova.plugins.msalPlugin.signInInteractive(
+                                        function (resp) {
+                                            console.log('signInInteractive');
+                                            isDeviceAuthenticated = true;
+                                            isUserAuthenticated = true;
+                                            console.log(resp);
+                                        },
+                                        function (err) {
+                                            console.log('signInInteractive err')
+                                            console.log(err);
+                                            window.cordova.plugins.msalPlugin.signOut(
+                                                function (msg) {
+                                                    console.log('out');
+                                                    console.log(msg);
+                                                },
+                                                function (err) {
+                                                    console.log('out err');
+                                                    console.log(err);
+                                                }
+                                            );
+                                        }
+                                    );
+                                }
+                            );
+                        },
+                        function (err) {
+                            console.log(err);
+                        }, options);
                 });
             }
         },
@@ -74,6 +133,3 @@ function onSuccess(imageData) {
 function onFail(message) {
     alert('Failed because: ' + message);
 }
-
-
-// Get geo coordinates
