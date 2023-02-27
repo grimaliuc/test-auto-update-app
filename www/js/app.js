@@ -63,9 +63,9 @@ var app = new Framework7({
                             window.cordova.plugins.msalPlugin.signInSilent(
                                 function (respAuth) {
                                     console.log(respAuth['account']['username']);
-                                    // localStorage.setItem('client', resp['account']['username']);
-                                    // console.log(respAuth);
+                                    localStorage.setItem('client', respAuth['account']['username']);
                                     console.log('signed in');
+                                    location.reload();
                                 },
                                 function (err) {
                                     window.cordova.plugins.msalPlugin.signInInteractive(
@@ -80,6 +80,7 @@ var app = new Framework7({
                                             console.log(err);
                                             window.cordova.plugins.msalPlugin.signOut(
                                                 function (msg) {
+                                                    localStorage.removeItem('client');
                                                     console.log('out');
                                                     console.log(msg);
                                                 },
@@ -98,6 +99,15 @@ var app = new Framework7({
                         }, options);
                 });
             }
+            if ($page.name === 'home') {
+                $('#camera').on('click', function () {
+                    navigator.camera.getPicture(onSuccess, onFail, {
+                        quality: 50,
+                        destinationType: Camera.DestinationType.DATA_URL,
+                        correctOrientation: true
+                    });
+                });
+            }
         },
     },
 });
@@ -111,15 +121,6 @@ $('#my-login-screen .login-button').on('click', function () {
 
     // Alert username and password
     app.dialog.alert('Username: ' + username + '<br/>Password: ' + password);
-});
-
-
-$('#camera').on('click', function () {
-    navigator.camera.getPicture(onSuccess, onFail, {
-        quality: 50,
-        destinationType: Camera.DestinationType.DATA_URL,
-        correctOrientation: true
-    });
 });
 
 function onSuccess(imageData) {

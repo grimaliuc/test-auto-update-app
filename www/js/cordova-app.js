@@ -26,6 +26,8 @@ var cordovaApp = {
         const $ = f7.$;
         if (f7.device.electron) return;
 
+        var countPress = 0;
+
         document.addEventListener(
             'backbutton',
             function (e) {
@@ -91,6 +93,17 @@ var cordovaApp = {
                     f7.panel.close('.panel.panel-in');
                     e.preventDefault();
                     return false;
+                }
+                if (currentView && currentView.router && currentView.name === 'home') {
+                    e.preventDefault();
+                    if (countPress >= 1) {
+                        navigator.app.exitApp();
+                    }
+                    countPress += 1;
+                    setTimeout(function () {
+                        countPress = 0;
+                    }, 1000);
+                    showToastBottom(f7);
                 }
             },
             false,
@@ -170,7 +183,6 @@ var cordovaApp = {
         updatePluginInitRetries--;
         setTimeout(cordovaApp.checkForApplicationUpdate, 1000);
     },
-
     /**
      *
      */
@@ -188,21 +200,28 @@ var cordovaApp = {
         // Save f7 instance
         cordovaApp.f7 = f7;
         // document.addEventListener('readystatechange', (event) => {//just for browser testing
-            document.addEventListener('deviceready', () => {
+        document.addEventListener('deviceready', () => {
             // if (event.target.readyState === 'complete') {//just for browser testing
-                console.log('Device is ready');
-                // check if we have a newer version first thing on device ready
-                // will also check on every page init
-                cordovaApp.checkForApplicationUpdate();
-                console.log('After check for updates');
-                // Handle Keyboard
-                cordovaApp.handleKeyboard();
-                // Handle Android back button
-                cordovaApp.handleAndroidBackButton();
-                cordovaApp.handleSplashscreen();
+            console.log('Device is ready');
+            // check if we have a newer version first thing on device ready
+            // will also check on every page init
+            cordovaApp.checkForApplicationUpdate();
+            console.log('After check for updates');
+            // Handle Keyboard
+            cordovaApp.handleKeyboard();
+            // Handle Android back button
+            cordovaApp.handleAndroidBackButton();
+            cordovaApp.handleSplashscreen();
 
-                app.views.create('.view-main', {url: '/'});
+            app.views.create('.view-main', {url: '/'});
             // }//just for browser testing
         });
     },
+
 };
+const showToastBottom = (f7) => {
+    f7.toast.create({
+        text: 'Press back again to exit',
+        closeTimeout: 2000,
+    }).open();
+}

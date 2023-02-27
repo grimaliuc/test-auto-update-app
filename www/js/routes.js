@@ -1,14 +1,15 @@
-var isDeviceAuthenticated = true;
-var isUserAuthenticated = true;
-
+var isDeviceAuthenticated = false;
+var isUserAuthenticated = false;
+var userAuth = localStorage.getItem('client');
+if (userAuth !== null) {
+    isDeviceAuthenticated = true;
+    isUserAuthenticated = true;
+}
 async function checkAuth(context) {
+    console.log('am untreat')
     var router = this;
     /* some condition to check user is logged in */
     if (isDeviceAuthenticated && isUserAuthenticated) {
-        // if (localStorage.getItem('user_email') === null
-        // || localStorage.getItem('user_email').length === 0
-        // || Object.keys(store.state.user).length === 0)
-        //   await getOrganizerDetails(context)
         context.resolve();
     } else {
         context.reject();
@@ -54,6 +55,7 @@ var routes = [
     {
         path: '/settings/',
         url: './pages/settings.html',
+        beforeEnter: checkAuth,
     },
     {
         path: '/map/',
